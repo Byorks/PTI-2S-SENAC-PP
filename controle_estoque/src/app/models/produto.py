@@ -16,3 +16,11 @@ class Produto:
     def __post_init__(self):
         if not self.codigo:
             raise ValueError("Código obrigatório")
+        
+    def __str__(self):
+        return (
+            f"{self.nome}\n"
+            f"código: {self.codigo}\n"
+            f"preço: {self.preco}\n"
+            f"quantidade em estoque: {self.quantidade}\n"
+        )
