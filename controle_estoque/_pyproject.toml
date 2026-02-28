@@ -1,0 +1,18 @@
+
+# Hatchling
+
+[build-system]
+requires = ["hatchling >= 1.26"]   # versão recente para evitar bugs antigos
+build-backend = "hatchling.build"
+
+[project]
+name = "controle-estoque"
+version = "0.1.0"
+description = "Sistema de controle de estoque simples"
+readme = "README.md"               # opcional, se tiver
+requires-python = ">=3.8"
+dependencies = []                   # adicione depois se precisar de libs
+
+# ESSA PARTE RESOLVE O ERRO: diz explicitamente onde está o pacote
+[tool.hatch.build.targets.wheel]
+packages = ["src/app"]              # ← aponta para a pasta que contém __init__.py e seu código

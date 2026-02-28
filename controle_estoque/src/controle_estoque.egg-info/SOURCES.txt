@@ -1,0 +1,13 @@
+pyproject.toml
+src/app/__init__.py
+src/app/main.py
+src/app/services/__init__.py
+src/app/services/produtos.py
+src/app/utils/__init__.py
+src/app/utils/arquivos.py
+src/app/utils/console.py
+src/app/utils/csv.py
+src/controle_estoque.egg-info/PKG-INFO
+src/controle_estoque.egg-info/SOURCES.txt
+src/controle_estoque.egg-info/dependency_links.txt
+src/controle_estoque.egg-info/top_level.txt
