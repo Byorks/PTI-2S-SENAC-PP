@@ -16,7 +16,8 @@ O projeto aplica conceitos de:
 
 - Programação orientada a objetos
 - Estrutura de dados
-- Manipulação de arquivos csv
+- Manipulação de arquivos CSV
+- Injeção de dependência (Repository + Service)
 
 ## Tecnologias Utilizadas
 
@@ -37,17 +38,18 @@ controle_estoque
 │       ├── models
 │       │   └── produto.py
 │       ├── repositories
-│       │   └── produtos.py
+│       │   ├── memoria_produtos.py
+│       │   ├── produtos.py
+│       │   └── protocols.py
 │       ├── services
 │       │   └── produtos.py
 │       └── utils
 │           ├── arquivos.py
 │           ├── console.py
-│           └── csv.py
 └── pyproject.toml
 ```
 
-O projeto segue uma separação por camadas:
+Camadas:
 
 - Models: Representação das entidades
 - Repositories: Manipulação de dados
@@ -69,16 +71,33 @@ O projeto segue uma separação por camadas:
    cd PTI-2S-SENAC-PP
 ```
 
-1. Execute o projeto
+3. Execute o projeto
    Na raiz do projeto execute:
 
 ```
-   python -m src.app.main
+   cd controle_estoque/src
+   python -m app.main
 ```
 
-## 📈 Melhorias Futuras
+## Repositórios (dados)
+
+O sistema usa repositório via injeção de dependência no service, permitindo trocar a implementação sem mudar a regra de negócio.
+
+- Repositório CSV: persiste em `controle_estoque/data/produtos.csv` e não permite `codigo` duplicado.
+- Repositório em memória: carrega do CSV na inicialização e opera somente em memória (não persiste ao reiniciar). Se detectar `codigo` duplicado ao carregar, levanta `ValueError` (conflito).
+
+O contrato mínimo do repositório (para o service aceitar qualquer implementação) está em `repositories/protocols.py`.
+
+### Como trocar o repositório
+
+No arquivo `controle_estoque/src/app/main.py`, altere qual classe é instanciada:
+
+- Em memória: `ProdutoInMemoryRepository()`
+- CSV: `ProdutoRepository()`
+
+## Melhorias Futuras
 
 - Implementar feedback visual durante processamento
 - Criar navegação interativa por teclado
 - Implementar ordenação por critérios (nome, preço, quantidade)
-- Validar duplicidade de código de produto
+- Melhorar tratamento de erros no console (exibir mensagem e continuar)
