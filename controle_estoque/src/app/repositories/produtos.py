@@ -23,7 +23,7 @@ class ProdutoRepository:
             with CSV_FILE.open("w", newline="", encoding="utf-8") as file:
                 writer = csv.writer(file)  # Cria escritor CSV
                 # Seria possível assim: nova_lista = ["id", *CAMPOS] com uso de args
-                writer.writerow(CAMPOS)
+                writer.writerow(["id", *CAMPOS])
 
     # A seta é pra mostrar o tipo que vai ser retornado
     # Type hint

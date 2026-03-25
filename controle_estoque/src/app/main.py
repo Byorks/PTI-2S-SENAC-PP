@@ -1,8 +1,7 @@
 # Agora os imports funcionam
 from .utils.console import carregamento_pontos, limpar_console
 from .services.produtos import ProdutoService
-from .repositories.produtos import ProdutoRepository
-from .utils.console import limpar_console
+from .repositories.memoria_produtos import ProdutoInMemoryRepository
 from .models.produto import Produto
 
 # MVP
@@ -31,7 +30,7 @@ from .models.produto import Produto
  
 """
 
-repo = ProdutoRepository()
+repo = ProdutoInMemoryRepository()
 service = ProdutoService(repo)
 
 menu_ativo = True

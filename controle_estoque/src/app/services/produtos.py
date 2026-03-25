@@ -1,17 +1,17 @@
 
 from ..models.produto import Produto
-from ..repositories.produtos import ProdutoRepository
+from ..repositories.protocols import ProdutoRepositoryProtocol
 
 class ProdutoService: 
     # Injeção de dependência
     # Aqui estamos definindo que PessoaService espera receber um repository que seja ou herde
     # de ProdutoRepository, dessa forma evita acoplamento inserindo o ProdutoRepository
     # diretamente dentro da ProdutosService
-    def __init__(self, repo: ProdutoRepository):
-    # Armazena o repositório recebido como um atributo de instância
-    # Dessa forma conseguimos chamar a qualquer momento dentro da ProdutoService 
-    # self.repo.adicionar()
-     self.repo = repo
+    def __init__(self, repo: ProdutoRepositoryProtocol):
+        # Armazena o repositório recebido como um atributo de instância
+        # Dessa forma conseguimos chamar a qualquer momento dentro da ProdutoService 
+        # self.repo.adicionar()
+        self.repo = repo
 
     def cadastrar(self, codigo: str, nome: str, preco: float, quantidade: int) -> Produto:
         # Validações
@@ -42,4 +42,4 @@ class ProdutoService:
         return novo_produto
     
     def listar_todos(self) -> list[Produto]:
-       return self.repo.listar_todos()
+        return self.repo.listar_todos()
